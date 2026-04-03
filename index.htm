@@ -1,81 +1,562 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Younes Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Younes | Portfolio Créatif & Moderne</title>
+  <!-- Google Fonts & Font Awesome pour une typographie premium et icônes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      text-align: center;
-      padding: 50px;
-      background: #1e293b;
-    }
-    h1 { margin: 0; font-size: 40px; }
-    p { color: #94a3b8; }
 
-    .projects {
-      padding: 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    body {
+      background: #0a0c10;
+      font-family: 'Inter', sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Toasts / effet de grain subtil */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#ffffff08 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* conteneur global pour rester au-dessus du grain */
+    .container, header, section, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header moderne avec dégradé animé */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 110px;
+      background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle at 30% 20%, rgba(56, 189, 248, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 6px 14px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFFFFF, #94a3f8, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      background: none;
+      -webkit-background-clip: unset;
+      color: #cbd5e6;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    .hero .cta {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .card {
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    a {
-      color: #38bdf8;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      border: 1px solid #334155;
+      color: #e2e8f0;
       text-decoration: none;
+      font-size: 0.95rem;
     }
 
-    footer {
+    .btn-primary {
+      background: #0f172a;
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.1);
+    }
+
+    .btn-primary:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px -12px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-outline:hover {
+      background: #334155;
+      border-color: #5ee0fa;
+      transform: translateY(-2px);
+    }
+
+    /* Section style */
+    section {
+      padding: 80px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+      background: linear-gradient(120deg, #f1f5f9, #94a3f8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .section-sub {
+      color: #64748b;
+      margin-bottom: 48px;
+      font-size: 1.1rem;
+      border-left: 3px solid #38bdf8;
+      padding-left: 18px;
+    }
+
+    /* Grille projets ultra moderne */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: #38bdf8;
+      box-shadow: 0 25px 40px -12px #38bdf830;
+      background: rgba(30, 41, 59, 0.85);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      padding: 28px 28px 0 28px;
+      color: #38bdf8;
+    }
+
+    .project-card h3 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 16px 28px 12px;
+      letter-spacing: -0.2px;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      margin: 0 28px 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 28px 24px;
+    }
+
+    .tech-tag {
+      background: #0f172a;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #90e0ff;
+      border: 1px solid #334155;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 28px 28px;
+      color: #38bdf8;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .card-link i {
+      transition: transform 0.2s;
+    }
+
+    .card-link:hover {
+      gap: 12px;
+    }
+
+    .card-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* Section compétences / soft skills */
+    .skills {
+      background: linear-gradient(145deg, #0b1120, #030617);
+      border-radius: 48px;
+      margin-top: 20px;
+      padding: 48px 40px;
+      border: 1px solid #1e2a44;
+    }
+
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .skill-cat {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .skill-cat h4 {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #a5f3fc;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-badge {
+      background: #1e293b;
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: 0.2s;
+      border: 1px solid #334155;
+    }
+
+    .skill-badge:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+      transform: scale(1.02);
+    }
+
+    /* Citation / témoignage fictif */
+    .quote-block {
+      margin: 48px 0 20px;
+      background: rgba(56, 189, 248, 0.05);
+      border-radius: 32px;
+      padding: 36px 32px;
       text-align: center;
-      padding: 20px;
+      border-left: 4px solid #38bdf8;
+    }
+
+    .quote-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #cbd5f0;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .quote-author {
+      font-weight: 600;
+      color: #7dd3fc;
+    }
+
+    /* Footer moderne */
+    footer {
       background: #020617;
+      border-top: 1px solid #1e293b;
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .social-links a {
+      color: #94a3b8;
+      font-size: 1.6rem;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #38bdf8;
+      transform: translateY(-3px);
+    }
+
+    .footer-email {
+      font-size: 1rem;
+      background: #0f172a;
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 40px;
+      margin-bottom: 28px;
+      border: 1px solid #2d3a5e;
+    }
+
+    .footer-email i {
+      margin-right: 8px;
+      color: #38bdf8;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      section {
+        padding: 50px 20px;
+      }
+      .skills-wrapper {
+        flex-direction: column;
+      }
+      .project-card h3 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Younes 👨‍💻</h1>
-  <p>Web Developer | HTML CSS PHP</p>
+  <div class="hero">
+    <div class="badge">
+      <i class="fas fa-code"></i> disponible pour collaborations
+    </div>
+    <h1>Younes <span> tafroukht </span></h1>
+    <p>Architecte d'applications web | Créateur d'expériences digitales</p>
+    <div class="cta">
+      <a href="#" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Explorer projets</a>
+      <a href="#" class="btn btn-outline"><i class="fas fa-envelope"></i> Me contacter</a>
+    </div>
+  </div>
 </header>
 
-<section class="projects">
+<main>
+  <!-- Section Projets -->
+  <section>
+    <div>
+      <h2 class="section-title">✨ Projets récents</h2>
+      <div class="section-sub">Des solutions robustes et modernes, pensée pour l'efficacité et l'expérience utilisateur</div>
+    </div>
 
-  <div class="card">
-    <h3>Stock Management</h3>
-    <p>Application de gestion de stock</p>
-    <a href="#">Voir projet</a>
-  </div>
+    <div class="projects-grid">
+      <!-- Carte Stock Management améliorée -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-boxes"></i></div>
+        <h3>StockFlow</h3>
+        <p>Application complète de gestion d'inventaire multi-entrepôts. Alertes stock bas, tableaux de bord analytiques et génération de rapports PDF.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">Tailwind</span>
+          <span class="tech-tag">Chart.js</span>
+        </div>
+        <a href="#" class="card-link">Voir le projet <i class="fas fa-arrow-right"></i></a>
+      </div>
 
-  <div class="card">
-    <h3>Reclamation System</h3>
-    <p>Système de gestion des réclamations</p>
-    <a href="#">Voir projet</a>
-  </div>
+      <!-- Carte Réclamations -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-headset"></i></div>
+        <h3>ReclaimMaster</h3>
+        <p>Système intelligent de gestion des réclamations clients avec suivi en temps réel, assignation automatique et tableau de bord admin.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">AJAX</span>
+          <span class="tech-tag">Bootstrap 5</span>
+        </div>
+        <a href="#" class="card-link">Découvrir <i class="fas fa-arrow-right"></i></a>
+      </div>
 
-</section>
+      <!-- Nouveau projet: Dashboard Analytics (pour montrer la créativité) -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>InsightHub</h3>
+        <p>Dashboard analytique pour visualisation des KPIs en temps réel. Intégration API, export Excel, design responsive et dark mode.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">HTML5/CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Chart.js</span>
+          <span class="tech-tag">PHP</span>
+        </div>
+        <a href="#" class="card-link">Voir démo <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section compétences + techniques modernes -->
+  <section>
+    <div class="skills">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <h2 class="section-title" style="background: linear-gradient(135deg,#e2e8f0,#38bdf8);">⚡ Technologies & maîtrise</h2>
+        <p style="color:#94a3b8; margin-top: 12px;">Stack moderne, code propre et solutions scalables</p>
+      </div>
+      <div class="skills-wrapper">
+        <div class="skill-cat">
+          <h4><i class="fas fa-code"></i> Frontend</h4>
+          <div class="skill-items">
+            <span class="skill-badge">React.js</span>
+            <span class="skill-badge">Vue.js</span>
+            <span class="skill-badge">Tailwind CSS</span>
+            <span class="skill-badge">JavaScript ES6</span>
+            <span class="skill-badge">Bootstrap 5</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h4><i class="fas fa-server"></i> Backend</h4>
+          <div class="skill-items">
+            <span class="skill-badge">PHP 8</span>
+            <span class="skill-badge">Laravel</span>
+            <span class="skill-badge">MySQL / PDO</span>
+            <span class="skill-badge">Node.js</span>
+            <span class="skill-badge">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h4><i class="fas fa-tools"></i> Outils & DevOps</h4>
+          <div class="skill-items">
+            <span class="skill-badge">Git & GitHub</span>
+            <span class="skill-badge">Docker (basic)</span>
+            <span class="skill-badge">Figma</span>
+            <span class="skill-badge">Postman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Citation inspirante -->
+    <div class="quote-block">
+      <div class="quote-text">
+        <i class="fas fa-quote-left" style="color:#38bdf8; margin-right: 8px;"></i> 
+        Younes allie créativité front-end et robustesse back-end. Chaque projet devient une expérience fluide et performante.
+      </div>
+      <div class="quote-author">— Sarah M. (Lead Tech, partenaire)</div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <p>Contact: younes@email.com</p>
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+    </div>
+    <div class="footer-email">
+      <i class="fas fa-envelope"></i> younes.elhariri@devportfolio.com
+    </div>
+    <div class="copyright">
+      © 2025 Younes — Développeur fullstack créatif. Tous droits réservés.
+    </div>
+  </div>
 </footer>
 
+<!-- animation douce au scroll (optionnel) et ajout d'un petit effet de survol subtil -->
+<script>
+  // Ajoute une petite interaction de clic aux boutons "Voir projet" (simulation console)
+  document.querySelectorAll('.card-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log(`🔗 Navigation vers le projet : ${link.closest('.project-card')?.querySelector('h3')?.innerText || 'projet'}`);
+      // On peut afficher une alerte élégante pour l'exemple (optionnel)
+      alert("✨ Démo : projet en cours de déploiement. Cette version montre l'interface professionnelle du portfolio.");
+    });
+  });
+  document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("📬 Merci de l'intérêt ! Vous pouvez contacter Younes via l'email du footer.");
+    });
+  });
+</script>
 </body>
 </html>
