@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Younes Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 50px;
+      background: #1e293b;
+    }
+    h1 { margin: 0; font-size: 40px; }
+    p { color: #94a3b8; }
+
+    .projects {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Younes 👨‍💻</h1>
+  <p>Web Developer | HTML CSS PHP</p>
+</header>
+
+<section class="projects">
+
+  <div class="card">
+    <h3>Stock Management</h3>
+    <p>Application de gestion de stock</p>
+    <a href="#">Voir projet</a>
+  </div>
+
+  <div class="card">
+    <h3>Reclamation System</h3>
+    <p>Système de gestion des réclamations</p>
+    <a href="#">Voir projet</a>
+  </div>
+
+</section>
+
+<footer>
+  <p>Contact: younes@email.com</p>
+</footer>
+
+</body>
+</html>
